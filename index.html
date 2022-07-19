@@ -109,7 +109,8 @@ addEventListener("DOMContentLoaded", () => {
     onSearch: query => {
       document.getElementById("latest-search").innerText = query;
     },
-    query });
+    query },
+    backend: 'https://salessavvy-test-be.glean.com/');
 
   attach();
   document.getElementById("prepopulate").addEventListener('click', e => {

@@ -97,7 +97,9 @@ addEventListener("DOMContentLoaded", () => {
       const query = ssb.value;
       EmbeddedSearch.openSidebar({
         query,
-        recommendationsUrl: query.startsWith('http') ? query : undefined });
+        recommendationsUrl: query.startsWith('http') ? query : undefined,
+        backend: "https://salessavvy-test-be.glean.com/"
+      });
 
     }
   });
@@ -109,8 +111,9 @@ addEventListener("DOMContentLoaded", () => {
     onSearch: query => {
       document.getElementById("latest-search").innerText = query;
     },
-    query },
-    backend: "https://salessavvy-test-be.glean.com/");
+    query,
+    backend: "https://salessavvy-test-be.glean.com/"
+  });
 
   attach();
   document.getElementById("prepopulate").addEventListener('click', e => {
@@ -122,6 +125,7 @@ addEventListener("DOMContentLoaded", () => {
     onSearch: query => {
       document.getElementById("autocomplete-output").innerText = `Searched for ${query}`;
     },
+    backend: "https://salessavvy-test-be.glean.com/",
     searchBoxCustomizations: {
       border: '2px solid red',
       borderRadius: 5,

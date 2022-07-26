@@ -64,7 +64,10 @@
         var data = { email: 'steve.smith@salessavvy.net' }
         response = fetch('https://us-central1-salessavvy-test.cloudfunctions.net/getauthtoken', {
           method: 'POST',
-          body: data
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
         });
         return response.json();
       }

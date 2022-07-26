@@ -60,24 +60,27 @@
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
 
     <script id="rendered-js" >
-      function getAuthToken() {
-        var data = { email: 'steve.smith@salessavvy.net' }
-        response = fetch('https://us-central1-salessavvy-test.cloudfunctions.net/getauthtoken', {
+      async function getAuthToken() {
+        const data = { email: 'steve.smith@salessavvy.net' }
+        return fetch('https://us-central1-salessavvy-test.cloudfunctions.net/getauthtoken', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
-        });
-        return response.json;
+        }).then(response => {
+            const res = response.json();
+            return res;
+          }
+        );
       }
 
       const backend = 'https://salessavvy-test-be.glean.com/';
 
       let datasource = undefined;
 
-      function renderAutocomplete(query = '') {
-        const authToken = getAuthToken();
+      async function renderAutocomplete(query = '') {
+        const authToken = await getAuthToken();
         EmbeddedSearch.attachAutocomplete(document.getElementById("autocomplete-container"), {
           authToken,
           backend,
@@ -91,8 +94,8 @@
             verticalMargin: 0 } });
       }
 
-      function handleSearch(query) {
-        const authToken = getAuthToken();
+      async function handleSearch(query) {
+        const authToken = await getAuthToken();
         EmbeddedSearch.renderSearchResults(
         document.getElementById("search-results"),
         {
@@ -107,7 +110,7 @@
           } });
       }
 
-      addEventListener("DOMContentLoaded", () => renderAutocomplete());
+      addEventListener("DOMContentLoaded", async () => await renderAutocomplete());
 
     </script>
 

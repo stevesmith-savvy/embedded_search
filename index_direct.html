@@ -61,12 +61,13 @@
 
     <script id="rendered-js" >
       function getAuthToken() {
+        var data = { email: 'steve.smith@salessavvy.net' }
         response = fetch('https://us-central1-salessavvy-test.cloudfunctions.net/getauthtoken', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           }
-          body: JSON.stringify({email: 'steve.smith@salessavvy.net'})
+          body: JSON.stringify(data)
         });
         return response.json();
       }
